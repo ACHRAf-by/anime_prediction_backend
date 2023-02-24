@@ -6,7 +6,6 @@ pipeline {
         stage('Clone'){
             steps{
                 git branch: 'dev', credentialsId: 'jenkins-backend', url: 'git@github.com:Atheros7/anime_list_backend.git'
-                sh "git branch -D staging"
                 sh "git checkout -b staging"                
             }
         }
@@ -35,7 +34,8 @@ pipeline {
                     
                     if (merge) {
                         sh 'git checkout main'
-                        sh 'git merge --no-ff origin/your-feature-branch'
+                        sh 'git merge --no-ff origin/staging'
+                        sh "git branch -D staging"
                         sh 'git push origin main'
                     }
                 }
