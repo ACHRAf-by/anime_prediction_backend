@@ -18,7 +18,7 @@ pipeline {
         
         stage('test from github') {
             steps {
-                sh "pyhton -m unittest"
+                sh "python -m unittest discover"
             }
         }
         
