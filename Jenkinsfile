@@ -39,7 +39,6 @@ pipeline {
                         sshagent(credentials: ['jenkins-backend']){
                             sh 'git push origin main'
                         }        
-                        sh "git branch -D staging"
                     }
                 }
             }
