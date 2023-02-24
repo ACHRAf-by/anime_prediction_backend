@@ -1,5 +1,5 @@
 # Dependencies
-from flask import Flask, request, jsonify
+from flask import Flask, request
 import pandas as pd
 import jsonschema
 from jsonschema import validate
@@ -23,17 +23,15 @@ schema = {
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    
     json_data = request.get_json()
     try:
         validate(instance=json_data, schema=schema)
     except jsonschema.exceptions.ValidationError as err:
         return {'message': err.message}, 400
     # process the valid json_data here
-    return jsonify(json_data)
+    df = pd.DataFrame(json_data)
+    print(df)
+    return json_data
     
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
