@@ -11,14 +11,16 @@ pipeline {
             }
         }
         
-        stage('Build app') {
+        stage('Build') {
             steps {
-                dir("CI_Jenkins"){
-                    echo 'pip install -r requirements.txt'
-                    sh "pip install -r requirements.txt"
-                }
+                sh "pip install -r requirements.txt"  
+            }      
+        }
+        
+        stage('test from github') {
+            steps {
+                sh "pyhton -m unittest"
             }
-            
         }
     }
 }
