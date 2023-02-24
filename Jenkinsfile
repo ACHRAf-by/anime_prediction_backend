@@ -38,8 +38,9 @@ pipeline {
                         sh 'git merge --no-ff staging'
                         sshagent(credentials: ['jenkins-backend']){
                             sh 'git push origin main'
-                        }        
+                        }
                     }
+                    sh 'echo "Current Branch: $(git rev-parse --abbrev-ref HEAD)"'
                 }
             }
         }
