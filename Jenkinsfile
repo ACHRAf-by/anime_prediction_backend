@@ -3,9 +3,10 @@ pipeline {
     
     stages {
         
-        stage('clone from github'){
+        stage('Clone repo dev branch'){
             steps{
-                echo "Hello World!"
+                git branch: 'dev', credentialsId: 'jenkins-backend', url: 'git@github.com:Atheros7/anime_list_backend.git'
+                sh "ls"
             }
         }
     }
