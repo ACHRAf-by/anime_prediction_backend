@@ -19,7 +19,6 @@ schema = {
         "producer": {"type": "string"},
         "studio": {"type": "string"}
     },
-    "required": ["title", "gender", "description", "type", "producer", "studio"]
 }
 
 @app.route('/predict', methods=['POST'])
