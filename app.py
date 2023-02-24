@@ -29,8 +29,6 @@ def predict():
     except jsonschema.exceptions.ValidationError as err:
         return {'message': err.message}, 400
     # process the valid json_data here
-    df = pd.DataFrame(json_data)
-    print(df)
     return json_data
     
 if __name__ == '__main__':
