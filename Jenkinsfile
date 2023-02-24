@@ -35,8 +35,9 @@ pipeline {
                     
                     if (merge) {
                         sh 'git checkout main'
-                        sh 'git merge --no-ff origin/staging'
+                        sh 'git merge --no-ff staging'
                         sh 'git push origin main'
+                        sh "git branch -D staging"
                     }
                 }
             }
