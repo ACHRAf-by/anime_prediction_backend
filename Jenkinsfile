@@ -46,15 +46,19 @@ pipeline {
         }
         
         stage('Docker') {
-            when {
-                branch "main"
-            }
             steps {
-                sh 'docker login -u=${dockerhub_USR} -p=${dockerhub_PSW}'
-                sh 'docker build -t your-dockerhub-username/your-app-name:latest .'
-                sh 'docker push your-dockerhub-username/your-app-name:latest'
+                script {
+                    def currentBranch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+                    if (currentBranch == 'main') {
+                        sh 'docker login -u=${dockerhub_USR} -p=${dockerhub_PSW}'
+                        sh 'docker build -t your-dockerhub-username/your-app-name:latest .'
+                        sh 'docker push your-dockerhub-username/your-app-name:latest'
+                    } else {
+                        echo "Skipping Docker build and push because current branch is ${currentBranch}"
+                    }
+                }
             }
         }
-
+        
     }
 }
