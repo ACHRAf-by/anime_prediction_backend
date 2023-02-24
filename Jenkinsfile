@@ -47,7 +47,7 @@ pipeline {
         
         stage('Docker') {
             when {
-                branch 'main'
+                branch "main"
             }
             steps {
                 sh 'docker login -u=${dockerhub_USR} -p=${dockerhub_PSW}'
