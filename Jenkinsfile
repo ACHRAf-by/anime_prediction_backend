@@ -1,6 +1,10 @@
 pipeline {
     agent any
     
+    environment {
+        def dockerhub = credentials('dockerhub')
+    }
+    
     stages {
         
         stage('Clone'){
