@@ -47,6 +47,7 @@ pipeline {
         
         stage('Docker') {
             when {
+                sh 'echo "Current Branch: $(git rev-parse --abbrev-ref HEAD)"'
                 branch "main"
             }
             steps {
