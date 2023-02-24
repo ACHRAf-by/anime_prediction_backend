@@ -5,7 +5,7 @@ pipeline {
         
         stage('clone from github'){
             steps{
-                echo "Hello World"
+                echo "Hello World!"
             }
         }
     }
