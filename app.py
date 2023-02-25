@@ -21,7 +21,7 @@ schema = {
     },
 }
 
-@app.route('/prediction', methods=['POST'])
+@app.route('/api/prediction', methods=['POST'])
 def predict():
     json_data = request.get_json()
     try:
