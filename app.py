@@ -9,7 +9,7 @@ from flask_cors import CORS
 
 # API definition
 app = Flask(__name__)
-CORS(app, origins='http://localhost:3000')
+CORS(app, origins='*')
 
 # Define JSON schema
 schema = {
@@ -35,4 +35,4 @@ def predict():
     return jsonify({'result': random.randint(0, 5)})
     
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
