@@ -28,7 +28,7 @@ class TestPredict(unittest.TestCase):
         self.assertEqual(response.json, self.valid_data)
 
     def test_invalid_predict(self):
-        response = self.app.post('/predict', data=json.dumps(self.invalid_data), content_type='application/json')
+        response = self.app.post('/prediction', data=json.dumps(self.invalid_data), content_type='application/json')
         self.assertEqual(response.status_code, 400)
 
 if __name__ == '__main__':
