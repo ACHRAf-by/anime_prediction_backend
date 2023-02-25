@@ -21,7 +21,7 @@ pipeline {
             }      
         }
         
-        stage('test from github') {
+        stage('Test') {
             steps {
                 sh "python3 -m unittest"
             }
