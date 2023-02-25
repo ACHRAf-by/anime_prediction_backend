@@ -23,7 +23,7 @@ class TestPredict(unittest.TestCase):
         }
 
     def test_valid_predict(self):
-        response = self.app.post('/predict', data=json.dumps(self.valid_data), content_type='application/json')
+        response = self.app.post('/prediction', data=json.dumps(self.valid_data), content_type='application/json')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json, self.valid_data)
 
