@@ -1,6 +1,10 @@
 pipeline {
     agent any
     
+    environment {
+        def dockerhub = credentials('dockerhub')
+    }
+    
     stages {
         
         stage('Clone'){
@@ -52,10 +56,8 @@ pipeline {
               script {
                 def currentBranch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
                 if (currentBranch == 'main') {
-                  env.DOCKER_USER = DOCKER_USER
-                  env.DOCKER_PASS = DOCKER_PASS
-                  sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
-                  sh 'docker build -t jeandevise/anime-backend:latest .'
+                  sh 'docker image build -t jeandevise/anime-backend:latest .'
+                  sh 'docker login -u=${dockerhub_USR} -p=${dockerhub_PSW}'
                   sh 'docker push jeandevise/anime-backend:latest'
                 } else {
                   echo "Skipping Docker build and push because current branch is ${currentBranch}"
