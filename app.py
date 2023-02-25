@@ -1,13 +1,15 @@
 # Dependencies
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import pandas as pd
 import jsonschema
 from jsonschema import validate
 import random
+from flask_cors import CORS
+
 
 # API definition
 app = Flask(__name__)
-
+CORS(app, origins='http://localhost:3000')
 
 # Define JSON schema
 schema = {
@@ -30,7 +32,7 @@ def predict():
     except jsonschema.exceptions.ValidationError as err:
         return {'message': err.message}, 400
     # process the valid json_data here
-    return str(random.randint(0, 5))
+    return jsonify({'result': random.randint(0, 5)})
     
 if __name__ == '__main__':
     app.run()
