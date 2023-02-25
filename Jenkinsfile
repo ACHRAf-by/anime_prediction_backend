@@ -51,7 +51,9 @@ pipeline {
               script {
                 def currentBranch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
                 if (currentBranch == 'main') {
-                  sh "docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}"
+                  env.DOCKER_USER = DOCKER_USER
+                  env.DOCKER_PASS = DOCKER_PASS
+                  sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
                   sh 'docker build -t jeandevise/anime-backend:latest .'
                   sh 'docker push jeandevise/anime-backend:latest'
                 } else {
