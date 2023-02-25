@@ -54,9 +54,9 @@ pipeline {
                 script {
                     def currentBranch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
                     if (currentBranch == 'main') {
-                        sh 'sudo docker login -u=${dockerhub_USR} -p=${dockerhub_PSW}'
-                        sh 'sudo docker build -t jeandevise/anime-backend:latest .'
-                        sh 'sudo docker push jeandevise/anime-backend:latest'
+                        sh 'echo ${dockerhub_PSW} | sudo -S docker login -u=${dockerhub_USR} --password-stdin'
+                        sh 'docker build -t jeandevise/anime-backend:latest .'
+                        sh 'docker push jeandevise/anime-backend:latest'
                     } else {
                         echo "Skipping Docker build and push because current branch is ${currentBranch}"
                     }
