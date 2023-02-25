@@ -3,6 +3,7 @@ from flask import Flask, request
 import pandas as pd
 import jsonschema
 from jsonschema import validate
+import random
 
 # API definition
 app = Flask(__name__)
@@ -29,7 +30,7 @@ def predict():
     except jsonschema.exceptions.ValidationError as err:
         return {'message': err.message}, 400
     # process the valid json_data here
-    return json_data
+    return str(random.randint(0, 5))
     
 if __name__ == '__main__':
     app.run()
