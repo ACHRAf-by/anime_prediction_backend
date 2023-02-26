@@ -1,0 +1,122 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "Anime Rating",
+      "description": "An API to predict anime rating",
+      "version": "1.0"
+    },
+    "servers": [
+      {
+        "url": "/"
+      }
+    ],
+    "tags": [
+      {
+        "name": "predict",
+        "description": "Endpoint for predicting rating"
+      }
+    ],
+    "paths": {
+      "/api/prediction": {
+        "post": {
+          "tags": [
+            "predict"
+          ],
+          "description": "Predict rating",
+          "requestBody": {
+            "description": "Input data in JSON format",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "description": "The title of the anime"
+                    },
+                    "gender": {
+                      "type": "array",
+                      "description": "Array contains genders of the anime",
+                      "items": {
+                        "type": "string",
+                        "description": "The gender of the anime"
+                      }
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "The description of the anime"
+                    },
+                    "type": {
+                      "type": "integer",
+                      "description": "The type of the anime"
+                    },
+                    "producer": {
+                      "type": "string",
+                      "description": "The producer of the anime"
+                    },
+                    "studio": {
+                      "type": "string",
+                      "description": "The studio of the anime"
+                    }
+                  }
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful prediction",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "result": {
+                        "type": "integer",
+                        "description": "The prediction value"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input data",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "The error message"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+                "description": "Internal server Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "description": "The error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+          },
+          "x-codegen-request-body-name": "body"
+        }
+      }
+    },
+    "components": {}
+  }
