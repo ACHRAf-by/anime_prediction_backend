@@ -5,11 +5,23 @@ import jsonschema
 from jsonschema import validate
 import random
 from flask_cors import CORS
-
+from flask_swagger_ui import get_swaggerui_blueprint
 
 # API definition
 app = Flask(__name__)
 CORS(app, origins='*')
+
+SWAGGER_URL = '/api/swagger'
+API_URL = '/static/swagger.json'
+SWAGGER_BLUEPRINT = get_swaggerui_blueprint(
+    SWAGGER_URL, 
+    API_URL,
+    config= {
+        'app_name' : "Anime_Rating_API"
+    }
+)
+
+app.register_blueprint(SWAGGER_BLUEPRINT, url_prefix = SWAGGER_URL)
 
 # Define JSON schema
 schema = {
