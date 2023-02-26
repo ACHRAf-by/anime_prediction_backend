@@ -3,7 +3,7 @@ version: "3.8"
 services:
   app:
     container_name: app
-    build: ./../Dockerfile
+    image: jeandevise/anime-backend:latest
     ports: 
       -"5000:5000"
 
