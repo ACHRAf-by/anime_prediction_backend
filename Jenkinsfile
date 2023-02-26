@@ -40,6 +40,7 @@ pipeline {
                     
                     if (merge) {
                         sh 'git checkout main'
+                        sh 'git pull'
                         sh 'git merge --no-ff staging'
                         sshagent(credentials: ['jenkins-backend']){
                             sh 'git push origin main'
