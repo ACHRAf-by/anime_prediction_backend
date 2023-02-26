@@ -5,3 +5,4 @@ flask_cors
 flask_swagger_ui
 flasgger
 flask_restx
+locust
