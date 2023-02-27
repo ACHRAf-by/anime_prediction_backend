@@ -3,9 +3,7 @@ import string
 import nltk
 import joblib
 import numpy as np
-import lightgbm
 
-from sklearn.ensemble import BaggingClassifier
 from nltk.stem import SnowballStemmer
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords

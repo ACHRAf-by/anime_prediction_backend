@@ -3,7 +3,6 @@ from flask import Flask, request, jsonify
 import pandas as pd
 import jsonschema
 from jsonschema import validate
-import random
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
 from prometheus_flask_exporter import PrometheusMetrics
