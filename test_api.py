@@ -12,7 +12,7 @@ class TestPredict(unittest.TestCase):
             "Type": "0",
             "Producer": "My Producer",
             "Studio": "My Studio",
-            "Source": 1
+            "Source": "1"
         }
         self.invalid_data = {
             "Title": "My Title",
