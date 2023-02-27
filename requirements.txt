@@ -11,3 +11,4 @@ numpy
 sklearn
 locust
 prometheus_flask_exporter
+gensim
