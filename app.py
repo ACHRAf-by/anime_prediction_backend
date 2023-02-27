@@ -41,7 +41,6 @@ schema = {
 @app.route("/api/prediction", methods=["POST"])
 def predict():
     json_data = request.get_json()
-    print(json_data)    
     try:
         validate(instance=json_data, schema=schema)
     except jsonschema.exceptions.ValidationError as err:
@@ -50,7 +49,7 @@ def predict():
     process_input(pd.DataFrame([json_data]))
 
     # process the valid json_data here
-    return jsonify({"result": random.randint(0, 5)})
+    return jsonify({"result": process_input(pd.DataFrame([json_data]))})
 
 
 if __name__ == "__main__":

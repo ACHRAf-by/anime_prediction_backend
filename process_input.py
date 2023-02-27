@@ -3,8 +3,9 @@ import string
 import nltk
 import joblib
 import numpy as np
-import joblib
+import lightgbm
 
+from sklearn.ensemble import BaggingClassifier
 from nltk.stem import SnowballStemmer
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
@@ -71,12 +72,10 @@ def add_genre_columns(df):
 def process_input(df):
     type_mapping = {'TV': 0, 'Movie': 1, 'OVA': 2, 'Special': 3, 'ONA': 4, 'Music': 5}
     source_mapping = {'Original': 0, 'Manga': 1, 'Light novel': 2, 'Game': 3, 'Visual novel': 4, '4-koma manga': 5, 'Novel': 6, 'Unknown': 7, 'Other': 8, 'Picture book': 9, 'Web manga': 10, 'Music': 11, 'Book': 12, 'Card game': 13, 'Radio': 14, 'Digital manga': 15}
-    print(df['Gender'].dtypes)
     df['Type'] = df['Type'].replace(type_mapping)
     df['Source'] = df['Source'].replace(source_mapping)
     
     df = add_genre_columns(df)
-
     
     df['preprocessed_synopsis'] = df['Synopsis'].apply(lambda x: x.lower() if isinstance(x, str) else x)
     df['preprocessed_synopsis'] = df['preprocessed_synopsis'].apply(remove_punctuation)
@@ -113,9 +112,7 @@ def process_input(df):
     df['title_vectors'] = df['title_vectors'].apply(lambda x: np.array(x))
     df['producer_vectors'] = df['producer_vectors'].apply(lambda x: np.array(x))
     df['studio_vectors'] = df['studio_vectors'].apply(lambda x: np.array(x))
-    
-    print(df.dtypes)
-        
+            
     X = np.concatenate([df['synopsis_vectors'].values.tolist(),
                     df['title_vectors'].values.tolist(), 
                     df['Type'].values.reshape(-1,1),
@@ -165,8 +162,7 @@ def process_input(df):
                     df['Comedy'].values.reshape(-1,1),],
                     axis=1)
     
-    pred = clf.predict(X)
-    print(pred)
+    return int(clf.predict(X))
 
 
 
