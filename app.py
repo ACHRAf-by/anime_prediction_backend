@@ -3,10 +3,10 @@ from flask import Flask, request, jsonify
 import pandas as pd
 import jsonschema
 from jsonschema import validate
-import random
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
 from prometheus_flask_exporter import PrometheusMetrics
+from process_input import process_input
 
 
 # API definition
@@ -26,12 +26,13 @@ app.register_blueprint(SWAGGER_BLUEPRINT, url_prefix=SWAGGER_URL)
 schema = {
     "type": "object",
     "properties": {
-        "title": {"type": "string"},
-        "gender": {"type": "array", "items": {"type": "string"}},
-        "description": {"type": "string"},
-        "type": {"type": "integer", "enum": [0, 1]},
-        "producer": {"type": "string"},
-        "studio": {"type": "string"},
+        "Title": {"type": "string"},
+        "Gender": {"type": "array", "items": {"type": "string"}},
+        "Synopsis": {"type": "string"},
+        "Type": {"type": "string"},
+        "Producer": {"type": "string"},
+        "Studio": {"type": "string"},
+        "Source": {"type": "string"},
     },
 }
 
@@ -43,8 +44,11 @@ def predict():
         validate(instance=json_data, schema=schema)
     except jsonschema.exceptions.ValidationError as err:
         return {"message": err.message}, 400
+    
+    process_input(pd.DataFrame([json_data]))
+
     # process the valid json_data here
-    return jsonify({"result": random.randint(0, 5)})
+    return jsonify({"result": process_input(pd.DataFrame([json_data]))})
 
 
 if __name__ == "__main__":
