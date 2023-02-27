@@ -68,9 +68,7 @@ pipeline {
 
         stage('Start Monitoring'){
             steps{
-                dir("anime_list_backend/monitoring"){
                     sh 'docker-compose up'
-                }
             }
         }
     }
