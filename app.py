@@ -28,7 +28,7 @@ schema = {
     "properties": {
         "Title": {"type": "string"},
         "Gender": {"type": "array", "items": {"type": "string"}},
-        "Description": {"type": "string"},
+        "Synopsis": {"type": "string"},
         "Type": {"type": "string"},
         "Producer": {"type": "string"},
         "Studio": {"type": "string"},

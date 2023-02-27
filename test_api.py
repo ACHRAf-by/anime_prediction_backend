@@ -6,20 +6,22 @@ class TestPredict(unittest.TestCase):
     def setUp(self):
         self.app = app.test_client()
         self.valid_data = {
-            "title": "My Title",
-            "gender": ["Action", "Adventure"],
-            "description": "My description",
-            "type": 0,
-            "producer": "My Producer",
-            "studio": "My Studio"
+            "Title": "My Title",
+            "Gender": ["Action", "Adventure"],
+            "Synopsis": "My description",
+            "Type": "0",
+            "Producer": "My Producer",
+            "Studio": "My Studio",
+            "Source": 1
         }
         self.invalid_data = {
-            "title": "My Title",
-            "gender": "Invalid Gender",
-            "description": "My description",
-            "type": 0,
-            "producer": "My Producer",
-            "studio": "My Studio"
+            "Title": "My Title",
+            "Gender": "Invalid Gender",
+            "Synopsis": "My description",
+            "Type": "0",
+            "Producer": "My Producer",
+            "Studio": "My Studio",
+            "Source": "TV"
         }
 
     def test_valid_predict(self):
