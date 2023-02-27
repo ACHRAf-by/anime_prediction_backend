@@ -68,7 +68,9 @@ pipeline {
 
         stage('Start Monitoring'){
             steps{
+                dir('monitoring'){
                     sh 'docker-compose up'
+                }
             }
         }
     }
