@@ -8,7 +8,7 @@ flask_restx
 nltk
 joblib
 numpy
-sklearn
+scikit-learn==1.2.1
 locust
 prometheus_flask_exporter
 gensim
