@@ -5,5 +5,9 @@ flask_cors
 flask_swagger_ui
 flasgger
 flask_restx
+nltk
+joblib
+numpy
+sklearn
 locust
 prometheus_flask_exporter
